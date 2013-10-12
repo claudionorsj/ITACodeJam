@@ -41,6 +41,8 @@ def search(request):
 	else:
 		context = {'professor':professor}
 		return render(request, 'lista.html',context) 
+def oque(request):
+	return render(request, 'oque.html')
 
 #def login(request):
 #	code = request.GET.get('code')

@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^top/', 'notaprofs.views.top', name = 'top'),
     url(r'^todos/', 'notaprofs.views.todos', name = 'todos'),
     url(r'^search/', 'notaprofs.views.search', name = 'search'),
+    url(r'^oque/', 'notaprofs.views.oque', name = 'oque'),
 
     # Examples:
     # url(r'^$', 'notaprofs.views.home', name='home'),

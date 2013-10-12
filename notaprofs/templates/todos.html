@@ -45,12 +45,12 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
-        <div class="span6 offset3" style="text-align:center">
+        <div class="span6 offset0" style="text-align:left">
           {% for a in professor %}
             <form action='/perfil/' id="{{a.id}}" method="post">
               {% csrf_token %}
               <input type="hidden" name="code" value="{{a.id}}">
-              <a href="#" onclick="document.getElementById('{{a.id}}').submit()">{{a.nome}}</a>
+              <h1><a href="#" onclick="document.getElementById('{{a.id}}').submit()">{{a.nome}}</a></h1>
             </form>
           {% endfor %}
         </div>
