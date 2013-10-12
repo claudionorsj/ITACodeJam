@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^$', 'notaprofs.views.home', name='home'),
     url(r'^perfil/', 'notaprofs.views.perfil', name = 'perfil'),
     url(r'^top/', 'notaprofs.views.top', name = 'top'),
+    url(r'^todos/', 'notaprofs.views.todos', name = 'todos'),
 
     # Examples:
     # url(r'^$', 'notaprofs.views.home', name='home'),

@@ -25,7 +25,10 @@ def top(request):
 	context = {'professor':professor}
 	return render(request, 'top.html',context)
 
-#@csrf_exempt
+def todos(request):
+	professor = Professor.objects.all()
+	context = {'professor':professor}
+	return render(request, 'todos.html',context)
 #def login(request):
 #	code = request.GET.get('code')
 #	context = {'code' : code}
