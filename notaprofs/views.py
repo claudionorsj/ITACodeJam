@@ -19,7 +19,7 @@ def home(request):
 	return render(request, 'index.html', context)
 
 def perfil(request):
-	code = request.GET.get('code')
+	code = request.POST.get('code')
 	professor = Professor.objects.all().filter(id = code)
 	context = {'professor':professor}
 	return render(request, 'perfil.html', context)
