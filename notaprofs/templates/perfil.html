@@ -133,19 +133,22 @@
 		{% endfor %}
 	{% endif %}
 	</div>
-      	<div class="span4 offset0" style="text-align:left">
       		{% if professor %}
       			{% for i in professor %}
-	      			<font size = "10"> {{i.nome}}<br/><br/></font>
-				<font size = "10">Categoria1: {{i.notaCat1}}<br/><br/></font>
-				<font size = "10">Categoria2: {{i.notaCat2}}<br/><br/></font>
-				<font size = "10">Categoria3: {{i.notaCat3}}<br/><br/></font>
-				<font size = "10">Media: {{i.media}}<br/><br/></font>
-				<font size = "10">Numero de votos: {{i.numCat3}}<br/><br/></font>
+	<div class = "panel panel-primary">
+				<div class = "panel-heading">
+	      			<h1> {{i.nome}}<br/><br/><h1>
+				</div>
+				<div class = "panel-body">
+				<font size = "5">Categoria1: {{i.notaCat1}}<br/><br/></font>
+				<font size = "5">Categoria2: {{i.notaCat2}}<br/><br/></font>
+				<font size = "5">Categoria3: {{i.notaCat3}}<br/><br/></font>
+				<font size = "5">Media: {{i.media}}<br/><br/></font>
+				<font size = "5">Numero de votos: {{i.numCat3}}<br/><br/></font>
+				</div>
+      </div>
       			{% endfor %}
       		{% endif %}
-      	</div>
-      </div>
 
       <hr>
 
