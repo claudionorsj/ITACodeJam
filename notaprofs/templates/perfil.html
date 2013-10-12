@@ -137,11 +137,11 @@
 	      		<h1> {{professor.nome}}<br/><br/><h1>
 			</div>
 			<div class = "panel-body">
-				<font size = "5">Categoria1: {{professor.notaCat1}}<br/><br/></font>
-				<font size = "5">Categoria2: {{professor.notaCat2}}<br/><br/></font>
-				<font size = "5">Categoria3: {{professor.notaCat3}}<br/><br/></font>
-				<font size = "5">Media: {{professor.media}}<br/><br/></font>
-				<font size = "5">Numero de votos: {{professor.numCat3}}<br/><br/></font>
+				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
 				<form action='/votar/' id="{{professor.id}}" method="post">
 		        {% csrf_token %}
 		            <input type="hidden" name="code" value="{{professor.id}}">

@@ -20,6 +20,7 @@ def perfil(request):
 	professor = Professor.objects.get(id = code)
 	context = {'professor':professor}
 	return render(request, 'perfil.html', context)
+
 def top(request):
 	professor = Professor.objects.order_by('-media')[0:10]
 	context = {'professor':professor}
@@ -67,13 +68,11 @@ def voto(request):
 	elif voto3<0:
 		voto3=0
 	professor = Professor.objects.get(id=code)
-	professor.notaCat1=(professor.notaCat1*professor.numCat1+voto1)/(professor.numCat1+1)
-	professor.numCat1=professor.numCat1+1
-	professor.notaCat2=(professor.notaCat2*professor.numCat2+voto2)/(professor.numCat2+1)
-	professor.numCat2=professor.numCat2+1
-	professor.notaCat3=(professor.notaCat3*professor.numCat3+voto3)/(professor.numCat3+1)
-	professor.numCat3=professor.numCat3+1
+	professor.notaCat1=(professor.notaCat1*professor.numVotos+voto1)/(professor.numVotos+1)
+	professor.notaCat2=(professor.notaCat2*professor.numVotos+voto2)/(professor.numVotos+1)
+	professor.notaCat3=(professor.notaCat3*professor.numVotos+voto3)/(professor.numVotos+1)
+	professor.numVotos=professor.numVotos+1
 	professor.media=(professor.notaCat1+professor.notaCat2+professor.notaCat3)/3
 	professor.save()
-	context = {'professor':professor}
-	return render(request, 'perfil.html',context)
+	context = {'code':code}
+	return render(request, 'redirect.html', context)
