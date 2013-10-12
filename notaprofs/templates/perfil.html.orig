@@ -1,3 +1,4 @@
+
 <!DOCTYPE HTML>
 
 <html>
@@ -109,10 +110,10 @@
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="">Avalia&ccedil;&atilde;o Professores</a>
+          <a class="brand" href="/">Avalia&ccedil;&atilde;o Professores</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="/">Home</a></li>
               <li><a href="/todos">Lista professores</a></li>
               <li><a href="/top">Top 10</a></li>
             </ul>
@@ -125,15 +126,25 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
-      	<div class="span6 offset3" style="text-align:center">
-      		<img src="{{STATIC_URL}}maxresdefault.jpg" width="100%" style="padding-bottom:30px;">
-	      	<form action="/search/" method="post">
-	      		{% csrf_token %}
-	      		<input type="text" name="prof" style="width:100%;"> <br/>
-	      		<input type="submit" value="Pesquisar Professor">
-	      	</form>
-	      	<br/><br/>
-	      	<a href="/oque">O que &eacute; isso?</a>
+      	<div class="span4 offset0" style="text-align:left">
+	{% if professor %}
+		{% for i in professor %}
+			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
+		{% endfor %}
+	{% endif %}
+	</div>
+      	<div class="span4 offset0" style="text-align:left">
+      		{% if professor %}
+      			{% for i in professor %}
+	      			<font size = "10"> {{i.nome}}<br/></font>
+				<font size = "10">{{i.notaCat1}}<br/></font>
+				<font size = "10">{{i.notaCat2}}<br/></font>
+				<font size = "10">{{i.notaCat3}}<br/></font>
+				<font size = "10">{{i.media}}<br/></font>
+				<font size = "10">{{i.numCat3}}<br/></font>
+      			{% endfor %}
+<<<<<<< HEAD
+      		{% endif %}
       	</div>
       </div>
 
@@ -152,3 +163,8 @@
     <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
   </body>
 </html>
+=======
+      		{% else %}
+      			Nao encontramos nenhum resultado <a href="/">Voltar &agrave; p&aacute;gina inicial</a>
+      		{% endif %}
+>>>>>>> 61121758906fa23d54283822d70209a2ab70d632

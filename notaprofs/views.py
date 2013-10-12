@@ -29,6 +29,19 @@ def todos(request):
 	professor = Professor.objects.all()
 	context = {'professor':professor}
 	return render(request, 'todos.html',context)
+
+def search(request):
+	name = request.POST.get('prof')
+	professor = Professor.objects.filter(nome__icontains = name)
+	if ( professor.count()==1):
+		context = {'professor':professor}
+		return render(request, 'perfil.html',context)
+	elif (professor.count()==0):
+		return render(request, 'perfil.html')
+	else:
+		context = {'professor':professor}
+		return render(request, 'lista.html',context) 
+
 #def login(request):
 #	code = request.GET.get('code')
 #	context = {'code' : code}
