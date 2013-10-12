@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render
-from notaprofs.models import *
+from profs.models import *
 from django.http import HttpResponseRedirect, HttpResponse
 #from django.views.decorators.csrf import csrf_exempt
 from django import forms
