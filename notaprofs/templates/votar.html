@@ -1,0 +1,106 @@
+<!DOCTYPE HTML>
+
+<html>
+  <head>
+      <meta charset="utf-8">
+      <title>Avaliacao Professores</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <!-- Le styles -->
+      <link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+      <style type="text/css">
+        body {
+          padding-top: 60px;
+          padding-bottom: 40px;
+        }
+      </style>
+      <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+      <!-- Fav and touch icons -->
+      <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-144-precomposed.png">
+      <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-72-precomposed.png">
+                      <link rel="apple-touch-icon-precomposed" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-57-precomposed.png">
+                                     <link rel="shortcut icon" href="{{STATIC_URL}}bootstrap/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">Avalia&ccedil;&atilde;o Professores</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li><a href="/">Home</a></li>
+              <li><a href="/todos">Lista professores</a></li>
+              <li><a href="/top">Top 10</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="row-fluid">
+        <div class="span6">
+          <form action="/voto/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="code" value='{{code}}'>
+            Cat 1<br/>
+            <input type="radio" name="Cat1" value='0'>0&nbsp;
+            <input type="radio" name="Cat1" value='1'>1&nbsp;
+            <input type="radio" name="Cat1" value='2'>2&nbsp;
+            <input type="radio" name="Cat1" value='3'>3&nbsp;
+            <input type="radio" name="Cat1" value='4'>4&nbsp;
+            <input type="radio" name="Cat1" value='5'>5&nbsp;
+            <input type="radio" name="Cat1" value='6'>6&nbsp;
+            <input type="radio" name="Cat1" value='7'>7&nbsp;
+            <input type="radio" name="Cat1" value='8'>8&nbsp;
+            <input type="radio" name="Cat1" value='9'>9&nbsp;
+            <input type="radio" name="Cat1" value='10' checked>10<br/>
+            <br/>Cat 2<br/>
+            <input type="radio" name="Cat2" value='0'>0&nbsp;
+            <input type="radio" name="Cat2" value='1'>1&nbsp; 
+            <input type="radio" name="Cat2" value='2'>2&nbsp; 
+            <input type="radio" name="Cat2" value='3'>3&nbsp; 
+            <input type="radio" name="Cat2" value='4'>4&nbsp; 
+            <input type="radio" name="Cat2" value='5'>5&nbsp; 
+            <input type="radio" name="Cat2" value='6'>6&nbsp; 
+            <input type="radio" name="Cat2" value='7'>7&nbsp; 
+            <input type="radio" name="Cat2" value='8'>8&nbsp; 
+            <input type="radio" name="Cat2" value='9'>9&nbsp; 
+            <input type="radio" name="Cat2" value='10' checked>10<br/>
+            <br/>Cat 3<br/>
+            <input type="radio" name="Cat3" value='0'>0&nbsp;
+            <input type="radio" name="Cat3" value='1'>1&nbsp;
+            <input type="radio" name="Cat3" value='2'>2&nbsp;
+            <input type="radio" name="Cat3" value='3'>3&nbsp;
+            <input type="radio" name="Cat3" value='4'>4&nbsp;
+            <input type="radio" name="Cat3" value='5'>5&nbsp;
+            <input type="radio" name="Cat3" value='6'>6&nbsp;
+            <input type="radio" name="Cat3" value='7'>7&nbsp;
+            <input type="radio" name="Cat3" value='8'>8&nbsp;
+            <input type="radio" name="Cat3" value='9'>9&nbsp;
+            <input type="radio" name="Cat3" value='10' checked>10<br/>
+            <br/><input type="submit" value="Efetuar Voto">
+          </form>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Flocos 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+  </body>
+</html>

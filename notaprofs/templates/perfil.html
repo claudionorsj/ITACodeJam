@@ -127,22 +127,23 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
       	<div class="span4 offset0" style="text-align:left">
-	{% if professor %}
-		{% for i in professor %}
-			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
-		{% endfor %}
-	{% endif %}
-	</div>
+		{% if professor %}
+				<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
+		{% endif %}
+		</div>
       	<div class="span4 offset0" style="text-align:left">
       		{% if professor %}
-      			{% for i in professor %}
-	      			<font size = "10"> {{i.nome}}<br/><br/></font>
-				<font size = "10">Categoria1: {{i.notaCat1}}<br/><br/></font>
-				<font size = "10">Categoria2: {{i.notaCat2}}<br/><br/></font>
-				<font size = "10">Categoria3: {{i.notaCat3}}<br/><br/></font>
-				<font size = "10">Media: {{i.media}}<br/><br/></font>
-				<font size = "10">Numero de votos: {{i.numCat3}}<br/><br/></font>
-      			{% endfor %}
+	      			<font size = "10"> {{professor.nome}}<br/><br/></font>
+				<font size = "10">Categoria1: {{professor.notaCat1}}<br/><br/></font>
+				<font size = "10">Categoria2: {{professor.notaCat2}}<br/><br/></font>
+				<font size = "10">Categoria3: {{professor.notaCat3}}<br/><br/></font>
+				<font size = "10">Media: {{professor.media}}<br/><br/></font>
+				<font size = "10">Numero de votos: {{professor.numCat3}}<br/><br/></font>
+	      		<form action='/votar/' id="{{professor.id}}" method="post">
+	              {% csrf_token %}
+	              <input type="hidden" name="code" value="{{professor.id}}">
+	              <a class="btn" href="#" onclick="document.getElementById('{{professor.id}}').submit()">Votar</a>
+	            </form>
       		{% endif %}
       	</div>
       </div>

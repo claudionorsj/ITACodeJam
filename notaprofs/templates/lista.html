@@ -46,14 +46,18 @@
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
         <div class="span6 offset3" style="text-align:center">
+          {% if professor %}
           Encontramos os seguintes resultados para sua busca:<br/><br/>
           {% for a in professor %}
-            <form action='/perfil/' id="perfil" method="post">
+            <form action='/perfil/' id="{{a.id}}" method="post">
               {% csrf_token %}
               <input type="hidden" name="code" value="{{a.id}}">
-              <a href="#" onclick="document.getElementById('perfil').submit()">{{a.nome}}</a>
+              <a href="#" onclick="document.getElementById('{{a.id}}').submit()">{{a.nome}}</a>
             </form>
           {% endfor %}
+          {% else %}
+          Nao encontramos porra de professor nenhum
+          {% endif %}
         </div>
       </div>
 

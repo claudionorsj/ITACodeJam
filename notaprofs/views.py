@@ -17,7 +17,7 @@ def home(request):
 
 def perfil(request):
 	code = request.POST.get('code')
-	professor = Professor.objects.filter(id = code)
+	professor = Professor.objects.get(id = code)
 	context = {'professor':professor}
 	return render(request, 'perfil.html', context)
 def top(request):
@@ -37,29 +37,41 @@ def search(request):
 		context = {'professor':professor}
 		return render(request, 'perfil.html',context)
 	elif (professor.count()==0):
-		return render(request, 'perfil.html')
+		return render(request, 'lista.html')
 	else:
 		context = {'professor':professor}
 		return render(request, 'lista.html',context) 
 
-#def login(request):
-#	code = request.GET.get('code')
-#	context = {'code' : code}
-#	return render(request, 'commerce/login.html', context)
-#@csrf_exempt	
-#def friendlist (request):
-#	access_token = request.GET.get('access_token')
-#	context = {'access_token' : access_token}
-#	return render(request, 'commerce/friendlist.html', context)
-#	
-#@csrf_exempt
-#def adicionar(request):
-#	produtoForm = ProdutoForm(request.POST)
-#	nome = produtoForm.data['nome']
-#	preco = produtoForm.data['preco']
-#	descricao = produtoForm.data['descricao']
-#	urlFoto = produtoForm.data['urlFoto']
-#	produtoAdd = Produto(nome=nome,preco=preco,descricao=descricao,usuario=1,urlFoto=urlFoto)
-#	produtoAdd.save()
-#	return HttpResponseRedirect('/home')
-#
+def votar(request):
+	code = request.POST.get('code')
+	context = {'code':code}
+	return render(request, 'votar.html',context)
+
+def voto(request):
+	code = request.POST.get('code')
+	voto1 = int(request.POST.get('Cat1'))
+	voto2 = int(request.POST.get('Cat2'))
+	voto3 = int(request.POST.get('Cat3'))
+	if voto1>10:
+		voto1=10
+	elif voto1<0:
+		voto1=0
+	if voto2>10:
+		voto2=10
+	elif voto2<0:
+		voto2=0
+	if voto3>10:
+		voto3=10
+	elif voto3<0:
+		voto3=0
+	professor = Professor.objects.get(id=code)
+	professor.notaCat1=(professor.notaCat1*professor.numCat1+voto1)/(professor.numCat1+1)
+	professor.numCat1=professor.numCat1+1
+	professor.notaCat2=(professor.notaCat2*professor.numCat2+voto2)/(professor.numCat2+1)
+	professor.numCat2=professor.numCat2+1
+	professor.notaCat3=(professor.notaCat3*professor.numCat3+voto3)/(professor.numCat3+1)
+	professor.numCat3=professor.numCat3+1
+	professor.media=(professor.notaCat1+professor.notaCat2+professor.notaCat3)/3
+	professor.save()
+	context = {'professor':professor}
+	return render(request, 'perfil.html',context)
