@@ -13,6 +13,7 @@ urlpatterns = patterns('',
     url(r'^search/', 'notaprofs.views.search', name = 'search'),
     url(r'^votar/', 'notaprofs.views.votar', name = 'votar'),
     url(r'^voto/', 'notaprofs.views.voto', name = 'voto'),
+    url(r'^oque/', 'notaprofs.views.oque', name = 'oque'),
 
     # Examples:
     # url(r'^$', 'notaprofs.views.home', name='home'),

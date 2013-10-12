@@ -128,25 +128,28 @@
       <div class="row-fluid">
       	<div class="span4 offset0" style="text-align:left">
 		{% if professor %}
-				<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
+			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
 		{% endif %}
 		</div>
-      	<div class="span4 offset0" style="text-align:left">
-      		{% if professor %}
-	      			<font size = "10"> {{professor.nome}}<br/><br/></font>
-				<font size = "10">Categoria1: {{professor.notaCat1}}<br/><br/></font>
-				<font size = "10">Categoria2: {{professor.notaCat2}}<br/><br/></font>
-				<font size = "10">Categoria3: {{professor.notaCat3}}<br/><br/></font>
-				<font size = "10">Media: {{professor.media}}<br/><br/></font>
-				<font size = "10">Numero de votos: {{professor.numCat3}}<br/><br/></font>
-	      		<form action='/votar/' id="{{professor.id}}" method="post">
-	              {% csrf_token %}
-	              <input type="hidden" name="code" value="{{professor.id}}">
-	              <a class="btn" href="#" onclick="document.getElementById('{{professor.id}}').submit()">Votar</a>
-	            </form>
-      		{% endif %}
+      	{% if professor %}
+		<div class = "panel panel-primary">
+			<div class = "panel-heading">
+	      		<h1> {{professor.nome}}<br/><br/><h1>
+			</div>
+			<div class = "panel-body">
+				<font size = "5">Categoria1: {{professor.notaCat1}}<br/><br/></font>
+				<font size = "5">Categoria2: {{professor.notaCat2}}<br/><br/></font>
+				<font size = "5">Categoria3: {{professor.notaCat3}}<br/><br/></font>
+				<font size = "5">Media: {{professor.media}}<br/><br/></font>
+				<font size = "5">Numero de votos: {{professor.numCat3}}<br/><br/></font>
+				<form action='/votar/' id="{{professor.id}}" method="post">
+		        {% csrf_token %}
+		            <input type="hidden" name="code" value="{{professor.id}}">
+		            <a class="btn" href="#" onclick="document.getElementById('{{professor.id}}').submit()">Votar</a>
+		        </form>
+			</div>
       	</div>
-      </div>
+      	{% endif %}
 
       <hr>
 

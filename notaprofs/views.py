@@ -41,6 +41,8 @@ def search(request):
 	else:
 		context = {'professor':professor}
 		return render(request, 'lista.html',context) 
+def oque(request):
+	return render(request, 'oque.html')
 
 def votar(request):
 	code = request.POST.get('code')
