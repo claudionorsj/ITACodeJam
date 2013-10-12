@@ -21,6 +21,7 @@ def home(request):
 def perfil(request):
 	code = request.GET.get('code')
 	professor = Professor.objects.all().filter(id = code)
+	context = {'professor':professor}
 	return render(request, 'perfil.html', context)
 #@csrf_exempt
 #def postar(request):
