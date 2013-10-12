@@ -68,14 +68,22 @@ STATIC_ROOT = ''
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
+<<<<<<< HEAD
+STATIC_URL = templatesDir + '/assets', 
+=======
 STATIC_URL = templatesDir + '/assets/' 
+>>>>>>> 6564d5ed7e516d0d5cd40f9938974201e92be2b8
 
 # Additional locations of static files
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+<<<<<<< HEAD
+    templatesDir + '/assets', 
+=======
     templatesDir + '/assets/', 
+>>>>>>> 6564d5ed7e516d0d5cd40f9938974201e92be2b8
 )
 
 # List of finder classes that know how to find static files in
