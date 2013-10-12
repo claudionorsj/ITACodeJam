@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, include, url
+#from notaprofs import views
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns(
+urlpatterns = patterns('',
     url(r'^$', 'notaprofs.views.home', name='home'),
 
     # Examples:

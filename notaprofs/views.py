@@ -1,28 +1,21 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render
-from commerce.models import *
+#from notaprofs.models import *
 from django.http import HttpResponseRedirect, HttpResponse
-from django.views.decorators.csrf import csrf_exempt
+#from django.views.decorators.csrf import csrf_exempt
 from django import forms
 
-#class ProdutoForm(forms.Form):
-#	nome = forms.CharField(max_length=100)
-#	preco = forms.IntegerField()
-#	descricao = forms.CharField(max_length=255)
-#	urlFoto = forms.CharField(max_length=255)
-#
+"""class ProdutoForm(forms.Form):
+	nome = forms.CharField(max_length=100)
+	preco = forms.IntegerField()
+	descricao = forms.CharField(max_length=255)
+	urlFoto = forms.CharField(max_length=255)
+"""
 #@csrf_exempt
-#def home(request):
-#	#listaAmigos 
-#	lista = []
-#	#for amigo in listaAmigos:
-#		#lista.extend(Produto.objects.filter(usuario = amigo.id))
-#	lista = Produto.objects.filter(usuario = 1)
-#	context = {'lista':lista}
-#	return render(request, 'commerce/home.html', context)
-#	#return render(request, 'commerce/home.html')
-#
+def home(request):
+	return render(request, 'index.html')
+
 #@csrf_exempt
 #def postar(request):
 #	#produtoLista = Produto.objects.filter(id = 1)
