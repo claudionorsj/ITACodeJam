@@ -1,3 +1,80 @@
-{% for a in professor %}
-	{{a.nome}}
-{% endfor %}
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+    	<meta charset="utf-8">
+	    <title>Avaliacao Professores</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	    
+	    <!-- Le styles -->
+	    <link href="{{STATIC_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">
+	    <style type="text/css">
+	      body {
+	        padding-top: 60px;
+	        padding-bottom: 40px;
+	      }
+	    </style>
+	    <link href="{{STATIC_URL}}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+	    <!-- Fav and touch icons -->
+	    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-144-precomposed.png">
+	    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-114-precomposed.png">
+	      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-72-precomposed.png">
+	                    <link rel="apple-touch-icon-precomposed" href="{{STATIC_URL}}bootstrap/ico/apple-touch-icon-57-precomposed.png">
+	                                   <link rel="shortcut icon" href="{{STATIC_URL}}bootstrap/ico/favicon.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="">Avalia&ccedil;&atilde;o Professores</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="hero-unit">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+      </div>
+      <div class="row">
+      	<div class="span4 offset4" style="text-align:center">
+      		{% if professores %}
+      			{% for i in professores %}
+	      			<form action="perfil/" id="myform" method="post">
+	      				{% csrf_token %}
+				      <input type="hidden" name="code" value="{{ i.id }}">
+				      <a href="#" onclick="document.getElementById('myform').submit();">{{i.nome}}</a>
+				    </form>
+      			{% endfor %}
+      		{% endif %}
+      	</div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Flocos 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+  </body>
+</html>

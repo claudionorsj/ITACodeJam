@@ -12,24 +12,19 @@ from django import forms
 	descricao = forms.CharField(max_length=255)
 	urlFoto = forms.CharField(max_length=255)
 """
-#@csrf_exempt
 def home(request):
-	professores = Professor.objects.all()
-	context = {'professores':professores}
-	return render(request, 'index.html', context)
+	return render(request, 'index.html')
 
 def perfil(request):
 	code = request.POST.get('code')
-	professor = Professor.objects.all().filter(id = code)
+	professor = Professor.objects.filter(id = code)
 	context = {'professor':professor}
 	return render(request, 'perfil.html', context)
-#@csrf_exempt
-#def postar(request):
-#	#produtoLista = Produto.objects.filter(id = 1)
-#	#produto = produtoLista[0]
-#	#context = {'produto':produto}
-#	return render(request, 'commerce/postar.html')
-#
+def top(request):
+	professor = Professor.objects.order_by('-media')[0:10]
+	context = {'professor':professor}
+	return render(request, 'top.html',context)
+
 #@csrf_exempt
 #def login(request):
 #	code = request.GET.get('code')

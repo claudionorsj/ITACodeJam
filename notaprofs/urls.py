@@ -8,6 +8,7 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     url(r'^$', 'notaprofs.views.home', name='home'),
     url(r'^perfil/', 'notaprofs.views.perfil', name = 'perfil'),
+    url(r'^top/', 'notaprofs.views.top', name = 'top'),
 
     # Examples:
     # url(r'^$', 'notaprofs.views.home', name='home'),
