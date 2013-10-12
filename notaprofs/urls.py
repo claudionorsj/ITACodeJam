@@ -4,7 +4,9 @@ from django.conf.urls import patterns, include, url
 # from django.contrib import admin
 # admin.autodiscover()
 
-urlpatterns = patterns('',
+urlpatterns = patterns(
+    url(r'^$', 'notaprofs.views.home', name='home'),
+
     # Examples:
     # url(r'^$', 'notaprofs.views.home', name='home'),
     # url(r'^notaprofs/', include('notaprofs.foo.urls')),
