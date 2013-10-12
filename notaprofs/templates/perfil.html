@@ -136,8 +136,29 @@
       	<div class="span4 offset0" style="text-align:left">
       		{% if professor %}
       			{% for i in professor %}
-	      			{{i.nome}}
+	      			<font size = "10"> {{i.nome}}<br/><br/></font>
+				<font size = "10">Categoria1: {{i.notaCat1}}<br/><br/></font>
+				<font size = "10">Categoria2: {{i.notaCat2}}<br/><br/></font>
+				<font size = "10">Categoria3: {{i.notaCat3}}<br/><br/></font>
+				<font size = "10">Media: {{i.media}}<br/><br/></font>
+				<font size = "10">Numero de votos: {{i.numCat3}}<br/><br/></font>
       			{% endfor %}
-      		{% else %}
-      			Nao encontramos nenhum resultado <a href="/">Voltar &agrave; p&aacute;gina inicial</a>
       		{% endif %}
+      	</div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Flocos 2013</p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
+    <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
+  </body>
+</html>
