@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.template import Context, loader
 from django.shortcuts import render
-#from notaprofs.models import *
+from notaprofs.models import *
 from django.http import HttpResponseRedirect, HttpResponse
 #from django.views.decorators.csrf import csrf_exempt
 from django import forms
@@ -14,8 +14,14 @@ from django import forms
 """
 #@csrf_exempt
 def home(request):
-	return render(request, 'index.html')
+	professores = Professor.objects.all()
+	context = {'professores':professores}
+	return render(request, 'index.html', context)
 
+def perfil(request):
+	code = request.GET.get('code')
+	professor = Professor.objects.all().filter(id = code)
+	return render(request, 'perfil.html', context)
 #@csrf_exempt
 #def postar(request):
 #	#produtoLista = Produto.objects.filter(id = 1)
