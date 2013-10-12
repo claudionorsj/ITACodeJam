@@ -53,7 +53,7 @@
       	<div class="span4 offset4" style="text-align:center">
       		{% if professores %}
       			{% for i in professores %}
-      				<a href="perfil" style="font-size:40px">{{ i.nome }}</a>
+					<a href="perfil" id="prof" profid="{{i.id}}">{{i.nome}}</a>
       			{% endfor %}
       		{% endif %}
       	</div>
@@ -70,6 +70,11 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
+    <script type="text/javascript">
+    	$("a#prof").click(function(){
+    		$.post($(this).attr("href"),{code: $(this).attr("profid")})
+    	});
+    </script>
     <script src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
     <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
   </body>
