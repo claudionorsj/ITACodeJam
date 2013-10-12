@@ -47,7 +47,11 @@
       <div class="row-fluid">
         <div class="span6 offset3" style="text-align:center">
           {% for a in professor %}
-            {{a.nome}}
+            <form action='/perfil/' id="perfil" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="code" value="{{a.id}}">
+              <a href="#" onclick="document.getElementById('perfil').submit()">{{a.nome}}</a>
+            </form>
           {% endfor %}
         </div>
       </div>
