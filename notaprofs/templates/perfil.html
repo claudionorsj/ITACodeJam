@@ -40,7 +40,7 @@
 	    });
 
 	  // Load the SDK asynchronously
-	  // Additional initialization code such as adding Event Listeners goes here
+	  	  // Additional initialization code such as adding Event Listeners goes here
 	  // Here we subscribe to the auth.authResponseChange JavaScript event. This event is fired
 	  // for any authentication related change, such as login, logout or session refresh. This means that
 	  // whenever someone who was previously logged out tries to log in again, the correct case below 
@@ -92,21 +92,6 @@
 
 	</script>
 	
-	
-	<!--
-	  Below we include the Login Button social plugin. This button uses the JavaScript SDK to
-	  present a graphical Login button that triggers the FB.login() function when clicked.
-
-	  Learn more about options for the login button plugin:
-	  /docs/reference/plugins/login/ -->
-
-	<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
-
-
-
-
-
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -126,35 +111,35 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
-      	<div class="span4 offset0" style="text-align:left">
+      	<div class="span4" style="text-align:left">
 		{% if professor %}
-			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
-		{% endif %}
+			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px">
 		</div>
-      	{% if professor %}
-		<div class = "panel panel-primary">
-			<div class = "panel-heading">
-	      		<h1> {{professor.nome}}<br/><br/><h1>
-			</div>
-			<div class = "panel-body">
-				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
-				<form action='/votar/' id="{{professor.id}}" method="post">
-		        {% csrf_token %}
-		            <input type="hidden" name="code" value="{{professor.id}}">
-			    <script>
-					    document.write("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
-			    </script>
-		        </form>
-			</div>
+      	<div class="span4" style="text-align:left">
+			<div class = "panel panel-primary">
+				<div class = "panel-heading">
+		      		<h1> {{professor.nome}}<br/><br/></h1>
+				</div>
+				<div class = "panel-body">
+					<font size = "5">Categoria1: {{professor.notaCat1}}<br/><br/></font>
+					<font size = "5">Categoria2: {{professor.notaCat2}}<br/><br/></font>
+					<font size = "5">Categoria3: {{professor.notaCat3}}<br/><br/></font>
+					<font size = "5">Media: {{professor.media}}<br/><br/></font>
+					<font size = "5">Numero de votos: {{professor.numCat3}}<br/><br/></font>
+					<form action='/votar/' id="{{professor.id}}" method="post">
+			        {% csrf_token %}
+			            <input type="hidden" name="code" value="{{professor.id}}">
+			            <a class="btn" href="#" onclick="document.getElementById('{{professor.id}}').submit()">Votar</a>
+			        </form>
+				</div>
+	      	</div>
+      	</div>
+      	<div class="span4">
+      		<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
       	</div>
       	{% endif %}
-
+      </div>
       <hr>
-
       <footer>
         <p>&copy; Flocos 2013</p>
       </footer>
