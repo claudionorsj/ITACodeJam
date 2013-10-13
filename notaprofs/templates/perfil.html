@@ -120,31 +120,31 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
+      	{% if professor %}
       	<div class="span4" style="text-align:left">
-		{% if professor %}
 			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px">
 		</div>
-      	{% if professor %}
-		<div class = "panel panel-primary">
-			<div class = "panel-heading">
-	      		<h1> {{professor.nome}}<br/><br/><h1>
-			</div>
-			<div class = "panel-body" id = 'corpo'>
-				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
-				<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
-				<form action='/votar/' id="{{professor.id}}" method="post">
-		        {% csrf_token %}
-		            <input type="hidden" name="code" value="{{professor.id}}">
-			    <script>
-			    		    if(window.logou == 1)
-						    document.write("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
-			    </script>
-		        </form>
-			</div>
-      	</div>
+		<div class="span4">
+			<div class = "panel panel-primary">
+				<div class = "panel-heading">
+		      		<h1> {{professor.nome}}<br/><br/></h1>
+				</div>
+				<div class = "panel-body" id = 'corpo'>
+					<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
+					<form action='/votar/' id="{{professor.id}}" method="post">
+			        {% csrf_token %}
+			            <input type="hidden" name="code" value="{{professor.id}}">
+			        </form>
+				</div>
+	      	</div>
+	    </div>
+	    <div class="span4">
+	    	<div class="fb-login-button" show-faces="true" width="200" max-rows="1" style="text-align:right"></div>
+	    </div>
       	{% endif %}
       </div>
       <hr>
