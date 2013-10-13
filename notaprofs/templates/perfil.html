@@ -30,7 +30,7 @@
 
 	<div id="fb-root"></div>
 	<script>
-	  var logou = 0;
+
 	  window.fbAsyncInit = function() {
 	    // init the FB JS SDK
 	    FB.init({
@@ -46,13 +46,20 @@
 	  // for any authentication related change, such as login, logout or session refresh. This means that
 	  // whenever someone who was previously logged out tries to log in again, the correct case below 
 	  // will be handled. 
+	  FB.getLoginStatus(function(response){
+		  if(response.status == "unknown")
+		      var node = document.getElementById('corpo');
+		      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh</br>");
+	  });
 	  FB.Event.subscribe('auth.authResponseChange', function(response) {
-	    // Here we specify what we do with the response anytime this event occurs. 
-	    if (response.status === 'connected') {
+	    // Here we specify what we do with	  
+
+	      if (response.status === 'connected') {
 	      // The response object is returned with a status field that lets the app know the current
 	      // login status of the person. In this case, we're handling the situation where they 
 	      // have logged in to the app.
 	      testAPI();
+	      return 0;
 	    } else if (response.status === 'not_authorized') {
 	      // In this case, the person is logged into Facebook, but not into the app, so we call
 	      // FB.login() to prompt them to do so. 
@@ -62,6 +69,7 @@
 	      // result from direct interaction from people using the app (such as a mouse click)
 	      // (2) it is a bad experience to be continually prompted to login upon page load.
 	      var node = document.getElementById('corpo');
+	      console.log("oi!!");
 	      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh");
 	      FB.login();
 	    } else {
@@ -71,9 +79,13 @@
 	      // dialog right after they log in to Facebook. 
 	      // The same caveats as above apply to the FB.login() call here.
 	      var node = document.getElementById('corpo');
+	      console.log("oi!!!");
 	      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh");
 	      FB.login();
 	    }
+	      var node = document.getElementById('corpo');
+	      console.log("oi!!!");
+	      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh");
 	  });
 
 	  };
@@ -102,6 +114,8 @@
 	      var alunos = lista.split(',');
 	      if(alunos.indexOf(userId) <= -1)
 		      node.innerHTML = node.innerHTML + ("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+	      else
+		      node.innerHTML = node.innerHTML + ("voce so pode votar uma vez");
 	  }
 	</script>
 	
@@ -138,7 +152,7 @@
 		<div class="span4">
 			<div class = "panel panel-primary">
 				<div class = "panel-heading">
-		      		<h1> {{professor.nome}}<br/><br/></h1>
+					<h1> {{professor.nome}}<br/><br/></h1>
 				</div>
 				<div class = "panel-body" id = 'corpo'>
 					<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
@@ -147,9 +161,9 @@
 					<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
 					<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
 					<form action='/votar/' id="{{professor.id}}" method="post">
-			        {% csrf_token %}
-			            <input type="hidden" name="code" value="{{professor.id}}">
-			        </form>
+						{% csrf_token %}
+					    <input type="hidden" name="code" value="{{professor.id}}">
+					</form>
 				</div>
 	      	</div>
 	    </div>
