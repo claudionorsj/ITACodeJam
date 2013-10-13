@@ -52,6 +52,7 @@ def votar(request):
 
 def voto(request):
 	code = request.POST.get('code')
+	uid = request.POST.get('uid')
 	voto1 = int(request.POST.get('Cat1'))
 	voto2 = int(request.POST.get('Cat2'))
 	voto3 = int(request.POST.get('Cat3'))
@@ -73,6 +74,7 @@ def voto(request):
 	professor.notaCat3=(professor.notaCat3*professor.numVotos+voto3)/(professor.numVotos+1)
 	professor.numVotos=professor.numVotos+1
 	professor.media=(professor.notaCat1+professor.notaCat2+professor.notaCat3)/3
+	professor.alunos = professor.alunos + "," + uid;
 	professor.save()
 	context = {'code':code}
 	return render(request, 'redirect.html', context)

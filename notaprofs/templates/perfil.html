@@ -30,6 +30,7 @@
 
 	<div id="fb-root"></div>
 	<script>
+	  var logou = 0;
 	  window.fbAsyncInit = function() {
 	    // init the FB JS SDK
 	    FB.init({
@@ -87,9 +88,17 @@
 	    console.log('Welcome!  Fetching your information.... ');
 	    FB.api('/me', function(response) {
 	      console.log('Good to see you, ' + response.name + response.id + '.');
+	      habilitarVoto(response.id);
 	    });
 	  }
-
+	  function habilitarVoto(userId)
+	  {
+	      var node = document.getElementById('corpo');
+	      var lista= '{{professor.alunos}}';
+	      var alunos = lista.split(',');
+	      if(alunos.indexOf(userId) <= -1)
+		      node.innerHTML = node.innerHTML + ("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+	  }
 	</script>
 	
 	
@@ -136,7 +145,7 @@
 			<div class = "panel-heading">
 	      		<h1> {{professor.nome}}<br/><br/><h1>
 			</div>
-			<div class = "panel-body">
+			<div class = "panel-body" id = 'corpo'>
 				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
 				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
 				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
@@ -146,7 +155,8 @@
 		        {% csrf_token %}
 		            <input type="hidden" name="code" value="{{professor.id}}">
 			    <script>
-					    document.write("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+			    		    if(window.logou == 1)
+						    document.write("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
 			    </script>
 		        </form>
 			</div>
