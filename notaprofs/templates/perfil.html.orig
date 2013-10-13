@@ -30,6 +30,7 @@
 
 	<div id="fb-root"></div>
 	<script>
+	  var logou = 0;
 	  window.fbAsyncInit = function() {
 	    // init the FB JS SDK
 	    FB.init({
@@ -60,6 +61,8 @@
 	      // (1) JavaScript created popup windows are blocked by most browsers unless they 
 	      // result from direct interaction from people using the app (such as a mouse click)
 	      // (2) it is a bad experience to be continually prompted to login upon page load.
+	      var node = document.getElementById('corpo');
+	      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh");
 	      FB.login();
 	    } else {
 	      // In this case, the person is not logged into Facebook, so we call the login() 
@@ -67,6 +70,8 @@
 	      // of whether they are logged into the app. If they aren't then they'll see the Login
 	      // dialog right after they log in to Facebook. 
 	      // The same caveats as above apply to the FB.login() call here.
+	      var node = document.getElementById('corpo');
+	      node.innerHTML = node.innerHTML + ("vc precisa estar logado duuh");
 	      FB.login();
 	    }
 	  });
@@ -87,26 +92,19 @@
 	    console.log('Welcome!  Fetching your information.... ');
 	    FB.api('/me', function(response) {
 	      console.log('Good to see you, ' + response.name + response.id + '.');
+	      habilitarVoto(response.id);
 	    });
 	  }
-
+	  function habilitarVoto(userId)
+	  {
+	      var node = document.getElementById('corpo');
+	      var lista= '{{professor.alunos}}';
+	      var alunos = lista.split(',');
+	      if(alunos.indexOf(userId) <= -1)
+		      node.innerHTML = node.innerHTML + ("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+	  }
 	</script>
 	
-	
-	<!--
-	  Below we include the Login Button social plugin. This button uses the JavaScript SDK to
-	  present a graphical Login button that triggers the FB.login() function when clicked.
-
-	  Learn more about options for the login button plugin:
-	  /docs/reference/plugins/login/ -->
-
-	<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
-
-
-
-
-
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -126,30 +124,53 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="row-fluid">
-      	<div class="span4 offset0" style="text-align:left">
-	{% if professor %}
-		{% for i in professor %}
-			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px"></img>
-		{% endfor %}
-	{% endif %}
-	</div>
-      	<div class="span4 offset0" style="text-align:left">
-      		{% if professor %}
-      			{% for i in professor %}
-	      			<font size = "10"> {{i.nome}}<br/></font>
-				<font size = "10">{{i.notaCat1}}<br/></font>
-				<font size = "10">{{i.notaCat2}}<br/></font>
-				<font size = "10">{{i.notaCat3}}<br/></font>
-				<font size = "10">{{i.media}}<br/></font>
-				<font size = "10">{{i.numCat3}}<br/></font>
-      			{% endfor %}
+      	{% if professor %}
 <<<<<<< HEAD
-      		{% endif %}
+		<div class = "panel panel-primary">
+			<div class = "panel-heading">
+	      		<h1> {{professor.nome}}<br/><br/><h1>
+			</div>
+			<div class = "panel-body" id = 'corpo'>
+				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
+				<form action='/votar/' id="{{professor.id}}" method="post">
+		        {% csrf_token %}
+		            <input type="hidden" name="code" value="{{professor.id}}">
+		        </form>
+			</div>
       	</div>
+=======
+      	<div class="span4" style="text-align:left">
+			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px">
+		</div>
+		<div class="span4">
+			<div class = "panel panel-primary">
+				<div class = "panel-heading">
+		      		<h1> {{professor.nome}}<br/><br/></h1>
+				</div>
+				<div class = "panel-body" id = 'corpo'>
+					<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
+					<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
+					<form action='/votar/' id="{{professor.id}}" method="post">
+			        {% csrf_token %}
+			            <input type="hidden" name="code" value="{{professor.id}}">
+			        </form>
+				</div>
+	      	</div>
+	    </div>
+	    <div class="span4">
+	    	<div class="fb-login-button" show-faces="true" width="200" max-rows="1" style="text-align:right"></div>
+	    </div>
+>>>>>>> 5e4a075531f043c3361ed0c6d49675e17a490e1a
+      	{% endif %}
       </div>
-
       <hr>
-
       <footer>
         <p>&copy; Flocos 2013</p>
       </footer>
@@ -163,8 +184,3 @@
     <script src="{{STATIC_URL}}bootstrap/js/bootstrap.js"></script>
   </body>
 </html>
-=======
-      		{% else %}
-      			Nao encontramos nenhum resultado <a href="/">Voltar &agrave; p&aacute;gina inicial</a>
-      		{% endif %}
->>>>>>> 61121758906fa23d54283822d70209a2ab70d632
