@@ -30,6 +30,7 @@
 
 	<div id="fb-root"></div>
 	<script>
+	  var logou = 0;
 	  window.fbAsyncInit = function() {
 	    // init the FB JS SDK
 	    FB.init({
@@ -87,9 +88,17 @@
 	    console.log('Welcome!  Fetching your information.... ');
 	    FB.api('/me', function(response) {
 	      console.log('Good to see you, ' + response.name + response.id + '.');
+	      habilitarVoto(response.id);
 	    });
 	  }
-
+	  function habilitarVoto(userId)
+	  {
+	      var node = document.getElementById('corpo');
+	      var lista= '{{professor.alunos}}';
+	      var alunos = lista.split(',');
+	      if(alunos.indexOf(userId) <= -1)
+		      node.innerHTML = node.innerHTML + ("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+	  }
 	</script>
 	
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -115,27 +124,26 @@
 		{% if professor %}
 			<img src="http://media.teamxbox.com/staff/yggr_shock.jpg" alt="140x140" class="img-rounded" style = "width: 300; height: 300px">
 		</div>
-      	<div class="span4" style="text-align:left">
-			<div class = "panel panel-primary">
-				<div class = "panel-heading">
-		      		<h1> {{professor.nome}}<br/><br/></h1>
-				</div>
-				<div class = "panel-body">
-					<font size = "5">Categoria1: {{professor.notaCat1}}<br/><br/></font>
-					<font size = "5">Categoria2: {{professor.notaCat2}}<br/><br/></font>
-					<font size = "5">Categoria3: {{professor.notaCat3}}<br/><br/></font>
-					<font size = "5">Media: {{professor.media}}<br/><br/></font>
-					<font size = "5">Numero de votos: {{professor.numCat3}}<br/><br/></font>
-					<form action='/votar/' id="{{professor.id}}" method="post">
-			        {% csrf_token %}
-			            <input type="hidden" name="code" value="{{professor.id}}">
-			            <a class="btn" href="#" onclick="document.getElementById('{{professor.id}}').submit()">Votar</a>
-			        </form>
-				</div>
-	      	</div>
-      	</div>
-      	<div class="span4">
-      		<fb:login-button show-faces="true" width="200" max-rows="1"></fb:login-button>
+      	{% if professor %}
+		<div class = "panel panel-primary">
+			<div class = "panel-heading">
+	      		<h1> {{professor.nome}}<br/><br/><h1>
+			</div>
+			<div class = "panel-body" id = 'corpo'>
+				<font size = "5">Categoria1: {{professor.notaCat1|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria2: {{professor.notaCat2|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Categoria3: {{professor.notaCat3|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Media: {{professor.media|floatformat:"2"}}<br/><br/></font>
+				<font size = "5">Numero de votos: {{professor.numVotos}}<br/><br/></font>
+				<form action='/votar/' id="{{professor.id}}" method="post">
+		        {% csrf_token %}
+		            <input type="hidden" name="code" value="{{professor.id}}">
+			    <script>
+			    		    if(window.logou == 1)
+						    document.write("<a class=\"btn\" href=\"#\" onclick=\"document.getElementById(\'{{professor.id}}\').submit()\">Votar</a>");
+			    </script>
+		        </form>
+			</div>
       	</div>
       	{% endif %}
       </div>
